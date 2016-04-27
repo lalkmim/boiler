@@ -1,6 +1,11 @@
 var Sequelize = require('sequelize');
 var fs = require('fs');
 var path = require('path');
+var config = require('../config');
+
+if (!fs.existsSync(config.database.folder)){
+    fs.mkdirSync(config.database.folder);
+}
 
 var sequelize = new Sequelize('database', null, null, {
     dialect: 'sqlite',
@@ -9,7 +14,7 @@ var sequelize = new Sequelize('database', null, null, {
         min: 0,
         idle: 10000
     },
-    storage: 'db/database.sqlite'
+    storage: path.join(config.database.folder, config.database.file)
 });
 
 fs.readdirSync(path.join(__dirname, '../models')).forEach(function (file) {
