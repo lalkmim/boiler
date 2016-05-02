@@ -9,8 +9,8 @@ module.exports = {
     site: {
         name: 'boiler-pes3',
         host: {
-            dev: 'http://pnpa0.asuscomm.com:9031',
-            c9: 'http://boiler-pes3-lalkmim.c9users.io',
+            dev: 'http://<dev_url>:<port>',
+            c9: 'http://boiler-pes3-<user>.c9users.io',
             prod: ''
         }
     },
