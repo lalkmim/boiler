@@ -34,3 +34,6 @@ node_modules
 
 # SQLite directory
 db
+
+# Environment information - look for config.default.js
+config.js
