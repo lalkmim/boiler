@@ -10,6 +10,7 @@ var http = require('http');
 var passport = require('passport');
 var io = require('../services/io');
 var db = require('../services/db');
+var router = require('../routes');
 
 /**
  * Get port from environment and store in Express.
@@ -93,6 +94,22 @@ function onListening() {
 }
 
 /*
+ * This guarantees that the exact same instance is shared to all calls
+ */
+app.set('io', io);
+app.set('db', db);
+
+/*
+ * Load routes
+ */
+router.loadRoutes();
+
+/*
+ * Load sequelize defined models
+ */
+db.loadModels();
+
+/*
  * Configure passport authentication
  */
 require('../services/passportConfig')(passport);
@@ -101,3 +118,9 @@ require('../services/passportConfig')(passport);
  * Attach socket.io to running server
  */
 io.attach(server);
+
+/*
+ * Other
+ */
+db.metadata();
+db.baseInserts();
