@@ -1,17 +1,16 @@
-//var User = require('../models/user');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var LocalStrategy = require('passport-local').Strategy;
 //var fbgraph = require('fbgraph');
+var config = require('../config');
 
-var host = 'http://pnpa0.asuscomm.com:9031';
+var host = config.site.host.dev;
 if(process.env.MODE == 'dev_c9') {
-	host = 'http://boiler-lalkmim.c9users.io';
+	host = config.site.host.c9;
 }
 
-console.log('host', host);
-console.log('MODE', process.env.MODE);
-
 module.exports = function(passport) {
+	var User = require('../models/user');
+	
 	passport.serializeUser(function(user, done) {
 		done(null, user.id);
 	});
@@ -55,9 +54,9 @@ module.exports = function(passport) {
 	));
 
 	passport.use(new FacebookStrategy({
-		clientID: 1507411012827539,
-		clientSecret: 'bd1f55c384ba7f9940f2f9bdaf9a7d44',
-		callbackURL: host + '/auth/facebook/callback'
+		clientID: config.passport.clientID,
+		clientSecret: config.passport.clientSecret,
+		callbackURL: host + config.passport.callbackURL
 	}, function(accessToken, refreshToken, profile, done) {
 		console.log('profile:', profile);
 		var dados = profile._json;
