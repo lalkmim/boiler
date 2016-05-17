@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passport = require('passport');
+var config = require('./config');
 
 var routes = require('./routes');
 
@@ -16,7 +18,7 @@ app.set('view engine', 'jade');
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(require('node-sass-middleware')({
@@ -32,6 +34,9 @@ app.use(require('node-sass-middleware')({
   outputStyle: 'compressed'
 }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(require('express-session')({ secret: config.express.session.secret, resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', routes);
 

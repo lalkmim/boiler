@@ -37,3 +37,7 @@ db
 
 # Environment information - look for config.default.js
 config.js
+
+# Generated CSS files
+public/stylesheets
+public/assets/css/*css

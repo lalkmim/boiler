@@ -5,10 +5,10 @@ div#header
         nav#nav
             ul
                 each val in menuItems
-                    - console.log(val.get());
                     li
                         a(href="#{val.get().link}") #{val.get().label}
                 li
+                    - console.log('user', user);
                     if user
                         a(href="/logout") Logout
                     else

@@ -11,6 +11,7 @@ var passport = require('passport');
 var io = require('../services/io');
 var db = require('../services/db');
 var router = require('../routes');
+var log = require('../services/log');
 
 /**
  * Get port from environment and store in Express.
@@ -122,5 +123,7 @@ io.attach(server);
 /*
  * Other
  */
-db.metadata();
+//db.metadata();
 db.baseInserts();
+
+log.i('Server ready to roll!');

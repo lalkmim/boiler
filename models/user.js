@@ -12,14 +12,15 @@ var User = db.define('User', {
         type: Sequelize.STRING,
         unique: true
     },
-    email: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
+    email: Sequelize.STRING,
     password: Sequelize.STRING,
     facebookId: {
         type: Sequelize.STRING,
         field: 'facebook_id'
+    },
+    googleId: {
+        type: Sequelize.STRING,
+        field: 'google_id'
     }
 }, {
     tableName: 'user'

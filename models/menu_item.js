@@ -1,5 +1,4 @@
 var Sequelize = require('sequelize');
-console.log(require('../app'));
 var db = require('../app').get('db');
 
 var MenuItem = db.define('MenuItem', {

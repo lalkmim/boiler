@@ -2,6 +2,7 @@ var Sequelize = require('sequelize');
 var fs = require('fs');
 var path = require('path');
 var config = require('../config');
+var log = require('../services/log');
 
 if (!fs.existsSync(config.database.folder)){
     fs.mkdirSync(config.database.folder);
@@ -32,10 +33,10 @@ module.exports.metadata = function() {
     db.query('SELECT * FROM sqlite_master',  { type: db.QueryTypes.SELECT })
     .then(function(tables) {
         for(var i=0; i<tables.length; i++) {
-            console.log(tables[i]);
+            log.d(tables[i]);
             db.query('pragma table_info(:tableName);',  { replacements: { tableName: tables[i] }, type: db.QueryTypes.SELECT })
             .then(function(table) {
-                console.log(table);
+                log.d(table);
             });
         }
     });

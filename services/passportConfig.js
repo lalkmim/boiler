@@ -1,7 +1,8 @@
 var FacebookStrategy = require('passport-facebook').Strategy;
 var LocalStrategy = require('passport-local').Strategy;
-//var fbgraph = require('fbgraph');
+var fbgraph = require('fbgraph');
 var config = require('../config');
+var log = require('../services/log');
 
 var host = config.site.host.dev;
 if(process.env.MODE == 'dev_c9') {
@@ -12,13 +13,17 @@ module.exports = function(passport) {
 	var User = require('../models/user');
 	
 	passport.serializeUser(function(user, done) {
+		log.d('passport.serializeUser >> user.id', user.id);
 		done(null, user.id);
 	});
 
-	passport.deserializeUser(function(id, done) {
-		User.findById(id, function (err, user) {
-			if(err) console.log(err);
-			done(err, user);
+	passport.deserializeUser(function(userId, done) {
+		log.d('passport.deserializeUser >> id', userId);
+		User.findById(userId)
+		.then(function (user) {
+			done(null, user);
+		}, function(err) {
+			log.e(err);
 		});
 	});
 	
@@ -58,40 +63,57 @@ module.exports = function(passport) {
 		clientSecret: config.passport.clientSecret,
 		callbackURL: host + config.passport.callbackURL
 	}, function(accessToken, refreshToken, profile, done) {
-		console.log('profile:', profile);
 		var dados = profile._json;
-		console.log(dados);
+		log.d('profile json', dados);
 		
-		var params = { 'facebook.id' : dados.id };
+		var email = '';
 		
-		User.findOne(params, function(err, user) {
-			if (err) {
-				console.log('user.findOne:', params, err);
-				return done(err);
+		email = (function* () {
+			fbgraph.get('/me', { access_token: accessToken, fields: 'email' }, function*(err, res) {
+				if(err) {
+					log.e(err);
+					done(err);
+				}
+				log.d('fbgraph.me', res);
+				yield res.email;
+			});
+		})().next().data;
+		
+		log.d('email', email);
+		
+		var whereClause = { 
+			where : { 
+				$or: [
+					{ facebookId : dados.id },
+					{ email: dados.email }
+				]
 			}
-			
-			console.log('user:', user);
-			
-			if(!user) {
-				user = new User();
-				user.local.email = dados.email;
-				user.facebook.id = dados.id;
-				user.facebook.email = dados.email;
-				user.facebook.name = dados.name;
-				user.trips = [];
-				user.friends = [];
-
-				/*
-				user.save(function(err, savedUser, affected) {
-					if(err) {
-						console.log('user.save:', err);
-						return done(err);
-					}
+		};
+		
+		log.d('whereClause', whereClause);
+		
+		User.findOne(whereClause).then(function(user) {
+			if(user) {
+				user = user.get();
+	  			log.d('user data values', user);
+	  			
+	  			return done(null, user);
+			} else {
+				user = User.build({
+					name: dados.name,
+					email: dados.email,
+					facebookId: dados.id
+				}).save().then(function() {
+					log.d('User.findOne >> save', user);
+					return done(null, user);
+				}, function(err) {
+					log.e(err);
+					return done(err);
 				});
-				*/
 			}
-			
-			done(null, user);
+		}, function(err) {
+			log.e('user.findOne:', whereClause, err);
+			return done(err);
 		});
 	}));
 };
