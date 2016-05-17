@@ -59,9 +59,9 @@ module.exports = function(passport) {
 	));
 
 	passport.use(new FacebookStrategy({
-		clientID: config.passport.clientID,
-		clientSecret: config.passport.clientSecret,
-		callbackURL: host + config.passport.callbackURL
+		clientID: config.passport.facebook.clientID,
+		clientSecret: config.passport.facebook.clientSecret,
+		callbackURL: host + config.passport.facebook.callbackURL
 	}, function(accessToken, refreshToken, profile, done) {
 		var dados = profile._json;
 		log.d('profile json', dados);

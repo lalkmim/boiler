@@ -1,3 +1,5 @@
+// Rename this file to config.js and update with correct values
+
 module.exports = {
     database: {
         folder: 'db',
@@ -15,8 +17,22 @@ module.exports = {
         }
     },
     passport: {
-        clientID: 0000000000000000,
-		clientSecret: '00000000000000000000000000000000',
-		callbackURL: '/auth/facebook/callback'
+        facebook: {
+            clientID: 0000000000000000,
+    		clientSecret: '00000000000000000000000000000000',
+    		callbackURL: '/auth/facebook/callback'
+        }
+    },
+    express: {
+        session: {
+            secret: 'boiler-pes3-secret'
+        }
+    },
+    log: {
+        papertrail: {
+            host: 'logs4.papertrailapp.com',
+            port: 1234,
+            program: 'default'
+        }
     }
 };

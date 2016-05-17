@@ -8,9 +8,10 @@ Features and libraries:
 + ExpressJS
 + Sass
 + Sequelize
++ Socket.IO
 + Passport authentication
     + Facebook
-+ Winston logging
++ Winston logging + Papertrail viewer
 
 # To-do
 
