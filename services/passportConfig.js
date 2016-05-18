@@ -1,4 +1,5 @@
 var FacebookStrategy = require('passport-facebook').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var LocalStrategy = require('passport-local').Strategy;
 var fbgraph = require('fbgraph');
 var config = require('../config');
@@ -57,6 +58,59 @@ module.exports = function(passport) {
 			});
 		}
 	));
+	
+	passport.use(new GoogleStrategy({
+		clientID: config.passport.google.clientID,
+		clientSecret: config.passport.google.clientSecret,
+		callbackURL: host + config.passport.google.callbackURL
+	},
+	function(accessToken, refreshToken, profile, done) {
+		var dados = profile._json;
+		log.d('profile json', dados);
+		
+		var whereClause = { 
+			where : { 
+				$or: [
+					{ googleId : dados.id },
+					{ email: dados.emails[0].value }
+				]
+			}
+		};
+		
+		log.d('whereClause', whereClause);
+		
+		User.findOne(whereClause).then(function(user) {
+			if(user) {
+				//user = user.get();
+				user.googleId = dados.id;
+				
+				log.d('user data values', user.get());
+				
+				user.save().then(function() {
+					return done(null, user.get());
+				},
+				function(err) {
+					log.e(err);
+					return done(err);
+				});
+			} else {
+				user = User.build({
+					name: dados.displayName,
+					email: dados.emails[0].value,
+					googleId: dados.id
+				}).save().then(function() {
+					log.d('User.findOne >> save', user);
+					return done(null, user);
+				}, function(err) {
+					log.e(err);
+					return done(err);
+				});
+			}
+		}, function(err) {
+			log.e('user.findOne:', whereClause, err);
+			return done(err);
+		});
+	}));
 
 	passport.use(new FacebookStrategy({
 		clientID: config.passport.facebook.clientID,
@@ -66,6 +120,7 @@ module.exports = function(passport) {
 		var dados = profile._json;
 		log.d('profile json', dados);
 		
+		/*
 		var email = '';
 		
 		email = (function* () {
@@ -80,6 +135,7 @@ module.exports = function(passport) {
 		})().next().data;
 		
 		log.d('email', email);
+		*/
 		
 		var whereClause = { 
 			where : { 
@@ -94,10 +150,17 @@ module.exports = function(passport) {
 		
 		User.findOne(whereClause).then(function(user) {
 			if(user) {
-				user = user.get();
-	  			log.d('user data values', user);
+				//user = user.get();
+				user.facebookId = dados.id;
+	  			log.d('user data values', user.get());
 	  			
-	  			return done(null, user);
+	  			user.save().then(function() {
+	  				return done(null, user.get());
+	  			},
+				function(err) {
+					log.e(err);
+					return done(err);
+				});
 			} else {
 				user = User.build({
 					name: dados.name,

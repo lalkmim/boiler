@@ -15,8 +15,7 @@ var log = new winston.Logger({
             port: config.log.papertrail.port,
             program: config.log.papertrail.program,
             logFormat: function(level, message) {
-                console.log(level, level.length);
-  			    return '[' + level.toUpperCase().substring(0, 4) + '] ' + message;
+                return '[' + level.toUpperCase().substring(0, 1) + '] ' + message;
   			}
         })
     ]
@@ -26,6 +25,6 @@ log.i = log.info;
 log.d = log.debug;
 log.e = log.error;
 log.w = log.warn;
-log.t = log.trace;
+log.s = log.silly;
 
 module.exports = log;

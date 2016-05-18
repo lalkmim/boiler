@@ -64,4 +64,13 @@ module.exports.controller = function(router) {
             log.d('res.redirect');
             res.redirect('/');
         });
+        
+    router.get('/auth/google', passport.authenticate('google', { scope : 'email' }));
+
+    router.get('/auth/google/callback',
+        passport.authenticate('google', { failureRedirect : '/error' }),
+        function(req, res) {
+            log.d('res.redirect');
+            res.redirect('/');
+        });
 };
