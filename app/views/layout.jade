@@ -45,5 +45,8 @@ body
                             li.navbar-item
                                 a.navbar-link(href="#third") Third
                             li.navbar-item
-                                a.navbar-link(href="/login") Login
+                                if user
+                                    a.navbar-link(href="/logout") Logout
+                                else
+                                    a.navbar-link(href="/login") Login
         block content

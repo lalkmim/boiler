@@ -84,7 +84,7 @@ module.exports = function(passport) {
 		
 		log.d('whereClause', whereClause);
 		
-		let user = User.findOne(whereClause);
+		let user = await User.findOne(whereClause);
 		try {
 			if(user) {
 				user.googleId = dados.id;
@@ -94,11 +94,13 @@ module.exports = function(passport) {
 				await user.save();
 				return done(null, user.get());
 			} else {
-				user = await User.build({
+				user = User.build({
 					name: dados.displayName,
 					email: dados.emails[0].value,
 					googleId: dados.id
-				}).save();
+				});
+				
+				await user.save();
 				
 				log.d('User.findOne >> save', user);
 				return done(null, user);
@@ -145,7 +147,7 @@ module.exports = function(passport) {
 		
 		log.d('whereClause', whereClause);
 		
-		let user = User.findOne(whereClause);
+		let user = await User.findOne(whereClause);
 		try {
 			if(user) {
 				user.facebookId = dados.id;
@@ -154,11 +156,13 @@ module.exports = function(passport) {
 	  			await user.save();
 	  			return done(null, user.get());
 			} else {
-				user = await User.build({
+				user = User.build({
 					name: dados.name,
 					email: dados.email,
 					facebookId: dados.id
-				}).save();
+				});
+				
+				await user.save();
 				
 				log.d('User.findOne >> save', user);
 				return done(null, user);
