@@ -2,7 +2,7 @@
 
 This is a boilerplate for a NodeJS web application using [Passport](http://passportjs.org), [ExpressJS](http://expressjs.com), [Socket.IO](http://socket.io), [Sass](http://sass-lang.com) and [Sequelize](http://sequelizejs.com) (PES3), using SQLite as database.
 
-The design is based on Arcana template from HTML5 UP (http://html5up.net/arcana).
+The design is based on [skeleton](http://getskeleton.com).
 
 Features and libraries:
 + ExpressJS
@@ -11,13 +11,17 @@ Features and libraries:
 + Socket.IO
 + Passport authentication
     + Facebook
+    + Google
 + Winston logging + Papertrail viewer
++ ES6 / ES7 ready through babel
 
 # To-do
 
 + Passport authentication
-    + Google+
-    + Local
+    + Local (JWT + bcrypt)
+    + Twitter
+    + Github
++ Use [node-config](https://github.com/lorenwest/node-config) for environment configuration
 + Review buttons design ([link](http://buttonoptimizer.com/))
 + Authorized socket.io communication
 + Setup Angular2

@@ -1,0 +1,27 @@
+extends layout
+
+block page_head_after
+    link(rel='stylesheet', href='/stylesheets/login.css')
+
+block content
+    section#loginForm
+        div.row
+            form(method="post")
+                div
+                    header
+                        h4 Sign in with your credentials:
+                    div
+                        input#login(type="text",name="login",placeholder="Login")
+                    div
+                        input#password(type="password",name="password",placeholder="Password")
+                    div
+                        input.button(type="submit",class="button alt",value="OK")
+        div.row
+            div
+                header
+                    h4 Or, if you prefer, you can also:
+                div.row
+                    div.six.columns
+                        a.button(class="facebook alt",href="/auth/facebook") Sign in with Facebook
+                    div.six.columns
+                        a.button(class="google alt",href="/auth/google") Sign in with Google+

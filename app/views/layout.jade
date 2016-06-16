@@ -1,0 +1,49 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="utf-8")
+        title= title
+        meta(name="description",content="")
+        meta(name="author",content="")
+        
+        meta(name="viewport",content="width=device-width, initial-scale=1")
+        
+        link(href="//fonts.googleapis.com/css?family=Raleway:400,300,600",rel="stylesheet",type="text/css")
+        
+        link(rel="stylesheet",href="stylesheets/normalize.css")
+        link(rel="stylesheet",href="stylesheets/skeleton.css")
+        link(rel="stylesheet",href="stylesheets/custom.css")
+        link(rel="stylesheet",href="stylesheets/menu.css")
+        
+        link(rel="icon",type="image/png",href="images/favicon.png")
+        
+        script(src="//code.jquery.com/jquery-2.2.4.min.js")
+        script(src="javascript/site.js")
+        
+        block page_head_after
+body
+    div.container
+        section#header
+            div.row
+                div.five.columns
+                    h1.title= title
+                div.seven.columns
+                    div.navbar-spacer
+                    div.navbar-item(class="navbar-menu")
+                        a.navbar-link(href="#") &#9776;
+                    nav.navbar
+                        ul.navbar-list
+                            li.navbar-item
+                                a.navbar-link(href="#first") First
+                            li.navbar-item
+                                a.navbar-link(href="#",data-child="true") Second
+                                ul.popover-list
+                                    li.popover-item
+                                        a.popover-link(href="#sub1") Sub 1
+                                    li.popover-item
+                                        a.popover-link(href="#sub2") Sub 2
+                            li.navbar-item
+                                a.navbar-link(href="#third") Third
+                            li.navbar-item
+                                a.navbar-link(href="/login") Login
+        block content
