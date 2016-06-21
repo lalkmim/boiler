@@ -27,11 +27,11 @@ app/coverage
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build
 build/Release
-app/build/Release
+src/build/Release
 
 # Dependency directory
 node_modules
-app/node_modules
+src/node_modules
 
 # Optional npm cache directory
 .npm
@@ -41,7 +41,7 @@ app/node_modules
 
 # SQLite directory
 db
-app/db
+src/db
 
 # Environment information - look for config.default.js
 config.js
@@ -49,5 +49,3 @@ config.js
 # Generated CSS files
 public/stylesheets
 public/assets/css/*css
-app/public/stylesheets
-app/public/assets/css/*css

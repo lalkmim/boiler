@@ -1,5 +1,3 @@
-'use strict';
-
 var Sequelize = require('sequelize');
 var db = require('../app').get('db');
 
@@ -21,7 +19,7 @@ var MenuItem = db.define('MenuItem', {
     tableName: 'menu_item'
 });
 
-MenuItem.hasMany(MenuItem, { as: 'SubItems', foreignKey: 'parent_id' });
+MenuItem.hasMany(MenuItem, {as: 'SubItems', foreignKey: 'parent_id' });
 
 MenuItem.sync();
 

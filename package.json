@@ -14,8 +14,8 @@
     ]
   },
   "scripts": {
-    "start": "npm run build && node ./build/bin/www",
-    "build": "rm -rf build/*; cp -rf app/* build/; babel app -d build --ignore=app/public/javascript/"
+    "start": "npm run build && node ./bin/www",
+    "build": "rm -rf app/*; babel src -d app"
   },
   "dependencies": {
     "babel-polyfill": "^6.9.1",

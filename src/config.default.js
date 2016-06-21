@@ -1,5 +1,3 @@
-'use strict';
-
 // Rename this file to config.js and update with correct values
 
 module.exports = {
@@ -21,8 +19,8 @@ module.exports = {
     passport: {
         facebook: {
             clientID: '0000000000000000',
-            clientSecret: '00000000000000000000000000000000',
-            callbackURL: '/auth/facebook/callback'
+    		clientSecret: '00000000000000000000000000000000',
+    		callbackURL: '/auth/facebook/callback'
         }
     },
     express: {

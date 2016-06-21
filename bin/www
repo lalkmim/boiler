@@ -4,14 +4,14 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+var app = require('../app/app');
 var debug = require('debug')('workspace:server');
 var http = require('http');
 var passport = require('passport');
-var io = require('../services/io');
-var db = require('../services/db');
-var router = require('../routes');
-var log = require('../services/log');
+var io = require('../app/services/io');
+var db = require('../app/services/db');
+var router = require('../app/routes');
+var log = require('../app/services/log');
 
 /**
  * Get port from environment and store in Express.
@@ -113,7 +113,7 @@ db.loadModels();
 /*
  * Configure passport authentication
  */
-require('../services/passportConfig')(passport);
+require('../app/services/passportConfig')(passport);
 
 /*
  * Attach socket.io to running server

@@ -1,5 +1,3 @@
-'use strict';
-
 var Sequelize = require('sequelize');
 var db = require('../app').get('db');
 
@@ -10,7 +8,7 @@ var User = db.define('User', {
         autoIncrement: true
     },
     name: Sequelize.STRING,
-    login: {
+    login: { 
         type: Sequelize.STRING,
         unique: true
     },
