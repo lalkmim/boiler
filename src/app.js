@@ -1,15 +1,17 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var passport = require('passport');
-var config = require('./config');
+import express from 'express';
+import path from 'path';
+import favicon from 'serve-favicon';
+import logger from 'morgan';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
+import passport from 'passport';
+import nodeSassMiddleware from 'node-sass-middleware';
+import expressSession from 'express-session';
 
-var routes = require('./routes');
+import config from './config';
+import routes from './routes';
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, '../views'));
@@ -21,22 +23,14 @@ app.use(logger('dev'));
 //app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(require('node-sass-middleware')({
+app.use(nodeSassMiddleware({
   src: path.join(__dirname, '../sass'),
   dest: path.join(__dirname, '../public'),
   indentedSyntax: false,
   outputStyle: 'compressed'
 }));
-/*
-app.use(require('node-sass-middleware')({
-  src: path.join(__dirname, 'assets/sass'),
-  dest: path.join(__dirname, 'public/assets'),
-  indentedSyntax: false,
-  outputStyle: 'compressed'
-}));
-*/
 app.use(express.static(path.join(__dirname, '../public')));
-app.use(require('express-session')({ secret: config.express.session.secret, resave: true, saveUninitialized: true }));
+app.use(expressSession({ secret: config.express.session.secret, resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -73,4 +67,4 @@ app.use(function(err, req, res, next) {
   });
 });
 
-module.exports = app;
+export default app;

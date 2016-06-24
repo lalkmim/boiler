@@ -18,41 +18,15 @@ html(lang="en")
         link(rel="icon",type="image/png",href="images/favicon.png")
         
         script(src="//code.jquery.com/jquery-2.2.4.min.js")
-        script(src="//cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js")
-        script(src="//cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js")
-        script(src="//cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js")
+        //script(src="//cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js")
+        //script(src="//cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js")
+        //script(src="//cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js")
         
-        script(src="javascript/app.js",type="text/babel")
+        //script(src="javascript/app.js",type="text/babel")
         script(src="javascript/site.js")
+        script(src="javascript/bundle.js")
         
         block page_head_after
 body
     div.container
-        section#header
-            div.row
-                div.five.columns
-                    h1.title= title
-                div.seven.columns
-                    div.navbar-spacer
-                    div.navbar-item(class="navbar-menu")
-                        a.navbar-link(href="#") &#9776;
-                    nav.navbar
-                        ul.navbar-list
-                            li.navbar-item
-                                a.navbar-link(href="#first") First
-                            li.navbar-item
-                                a.navbar-link(href="#",data-child="true") Second
-                                ul.popover-list
-                                    li.popover-item
-                                        a.popover-link(href="#sub1") Sub 1
-                                    li.popover-item
-                                        a.popover-link(href="#sub2") Sub 2
-                            li.navbar-item
-                                a.navbar-link(href="#third") Third
-                            li.navbar-item
-                                if user
-                                    a.navbar-link(href="/logout") Logout
-                                else
-                                    a.navbar-link(href="/login") Login
         block content
-        section#app

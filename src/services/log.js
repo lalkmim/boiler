@@ -1,7 +1,8 @@
-var config = require('../config');
-var winston = require('winston');
-var Papertrail = require('winston-papertrail').Papertrail;
-var log = new winston.Logger({
+import config from '../config';
+import winston from 'winston';
+import { Papertrail } from 'winston-papertrail';
+
+const log = new winston.Logger({
     transports: [
         new winston.transports.File({
             filename: './logs/general.log',
@@ -27,4 +28,4 @@ log.e = log.error;
 log.w = log.warn;
 log.s = log.silly;
 
-module.exports = log;
+export default log;

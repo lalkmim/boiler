@@ -1,6 +1,6 @@
 // Rename this file to config.js and update with correct values
 
-module.exports = {
+export default {
     database: {
         folder: 'db',
         file: 'database.sqlite',

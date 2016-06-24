@@ -4,14 +4,17 @@
  * Module dependencies.
  */
 
-var app = require('../app/app');
-var debug = require('debug')('workspace:server');
-var http = require('http');
-var passport = require('passport');
-var io = require('../app/services/io');
-var db = require('../app/services/db');
-var router = require('../app/routes');
-var log = require('../app/services/log');
+import app from '../app';
+import Debug from 'debug';
+import http from 'http';
+import passport from 'passport';
+import io from '../services/io';
+import db, { loadModels } from '../services/db';
+import { loadRoutes } from '../routes';
+import log from '../services/log';
+import passportConfig from '../services/passportConfig';
+
+const debug = Debug('workspace:server');
 
 /**
  * Get port from environment and store in Express.
@@ -103,17 +106,17 @@ app.set('db', db);
 /*
  * Load routes
  */
-router.loadRoutes();
+loadRoutes();
 
 /*
  * Load sequelize defined models
  */
-db.loadModels();
+loadModels();
 
 /*
  * Configure passport authentication
  */
-require('../app/services/passportConfig')(passport);
+passportConfig(passport);
 
 /*
  * Attach socket.io to running server
@@ -123,7 +126,24 @@ io.attach(server);
 /*
  * Other
  */
-//db.metadata();
-db.baseInserts();
-
 log.i('Server ready to roll!');
+
+const metadata = async function(db) {
+    var tables = await db.query('SELECT * FROM sqlite_master',  { type: db.QueryTypes.SELECT });
+    
+    for(var i=0; i<tables.length; i++) {
+        log.d(tables[i]);
+        var table = await db.query('pragma table_info(:tableName);',  { replacements: { tableName: tables[i] }, type: db.QueryTypes.SELECT });
+        log.d(table);
+    }
+};
+
+/*
+const baseInserts = async function(db) {
+    var user = User.build({ name: 'Leonardo', login: 'lalkmim', email: 'lalkmim@gmail.com'});
+    await user.save();
+    
+    var menuItem = MenuItem.build({ label: 'Home', link: '/'});
+    await menuItem.save();
+};
+*/

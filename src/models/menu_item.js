@@ -1,5 +1,7 @@
-var Sequelize = require('sequelize');
-var db = require('../app').get('db');
+import Sequelize from 'sequelize';
+import app from '../app';
+
+const db = app.get('db');
 
 var MenuItem = db.define('MenuItem', {
     id: {
@@ -23,4 +25,4 @@ MenuItem.hasMany(MenuItem, {as: 'SubItems', foreignKey: 'parent_id' });
 
 MenuItem.sync();
 
-module.exports = MenuItem;
+export default MenuItem;

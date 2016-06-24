@@ -4,27 +4,26 @@ This is a boilerplate for a NodeJS web application using [Passport](http://passp
 
 The design is based on [skeleton](http://getskeleton.com).
 
-Features and libraries:
-+ ExpressJS
+Working features and libraries:
++ Express
++ React
 + Sass
 + Sequelize
-+ Socket.IO
++ Winston logging + Papertrail viewer
++ Babel (ES6 + async/await ready)
++ Webpack
+
+# On the roadmap
++ Use socket.io for communication
++ Change authentication to run without refresh
 + Passport authentication
     + Facebook
     + Google
-+ Winston logging + Papertrail viewer
-+ ES6 / ES7 ready through babel
-
-# To-do
-
-+ Passport authentication
     + Local (JWT + bcrypt)
     + Twitter
     + Github
 + Use [node-config](https://github.com/lorenwest/node-config) for environment configuration
 + Review buttons design ([link](http://buttonoptimizer.com/))
-+ Authorized socket.io communication
-+ Setup React
 + Script to automatically point to new repository ([link to stackoverflow](https://stackoverflow.com/questions/28401882/make-git-clone-its-own-repository/28402208#28402208))
 + Script to automatically deploy to dev and prod (docker + aws) ([link to post](https://www.airpair.com/docker/posts/the-painful-journey-of-painless-deployments))
 + Support for MySQL / MariaDB

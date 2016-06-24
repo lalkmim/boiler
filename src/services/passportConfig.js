@@ -1,16 +1,16 @@
-var FacebookStrategy = require('passport-facebook').Strategy;
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-var LocalStrategy = require('passport-local').Strategy;
-var fbgraph = require('fbgraph');
-var config = require('../config');
-var log = require('../services/log');
+import { Strategy as FacebookStrategy } from 'passport-facebook';
+import { OAuth2Strategy as GoogleStrategy } from 'passport-google-oauth';
+import { Strategy as LocalStrategy } from 'passport-local';
+import fbgraph from 'fbgraph';
+import config from '../config';
+import log from '../services/log';
 
 var host = config.site.host.dev;
 if(process.env.MODE == 'dev_c9') {
 	host = config.site.host.c9;
 }
 
-module.exports = function(passport) {
+export default function(passport) {
 	var User = require('../models/user');
 	
 	passport.serializeUser(function(user, done) {
