@@ -9,17 +9,17 @@ Working features and libraries:
 + React
 + Sass
 + Sequelize
++ Use socket.io for communication
 + Winston logging + Papertrail viewer
 + Babel (ES6 + async/await ready)
 + Webpack
 
 # On the roadmap
-+ Use socket.io for communication
 + Change authentication to run without refresh
-+ Passport authentication
++ Passport authentication (JWT)
     + Facebook
     + Google
-    + Local (JWT + bcrypt)
+    + Local (bcrypt)
     + Twitter
     + Github
 + Use [node-config](https://github.com/lorenwest/node-config) for environment configuration
