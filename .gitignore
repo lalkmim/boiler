@@ -27,8 +27,6 @@ app/coverage
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build
 build/Release
-src/build/Release
-app
 
 # Dependency directory
 node_modules
@@ -49,9 +47,10 @@ config.js
 
 # Generated CSS files
 public/stylesheets
-public/assets/css/*css
 
 # Webpack generated file
-bundle.js
 public/javascript/bundle.js
-app/*
+public/javascript/bundle.js.map
+
+# Build project
+app

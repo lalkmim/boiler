@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router';
 import config from '../../../app/config';
 
+import './main.menu.scss';
+
 let Main = React.createClass({
     render() {
         return(

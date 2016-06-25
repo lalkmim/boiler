@@ -16,7 +16,7 @@
   "scripts": {
     "start": "npm run build && node ./app/bin/www.js",
     "build": "rm -rf app/*; babel src -d app",
-    "webpack:dev": "webpack --watch --display-modules",
+    "webpack:dev": "webpack --watch --display-modules -d",
     "webpack:prod": "webpack -p"
   },
   "dependencies": {
