@@ -10,15 +10,13 @@ import Users from './pages/users.js';
 
 $(document).ready(function() {
     ReactDOM.render((
-        <div>
-            <Router history={browserHistory}>
-                <Route path="/" component={Main}>
-                    <IndexRoute component={Home} />
-                    <Route path="/home" component={Home} />
-                    <Route path="/login" component={Login} />
-                    <Route path="/users" component={Users} />
-                </Route>
-            </Router>
-        </div>
+        <Router history={browserHistory}>
+            <Route path="/" component={Main}>
+                <IndexRoute component={Home} />
+                <Route path="/home" component={Home} />
+                <Route path="/users" component={Users} />
+                <Route path="/login" component={Login} />
+            </Route>
+        </Router>
     ), document.getElementById('app'));
 });

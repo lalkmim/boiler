@@ -5,20 +5,23 @@ This is a boilerplate for a NodeJS web application using [Passport](http://passp
 The design is based on [skeleton](http://getskeleton.com).
 
 Working features and libraries:
++ Passport
+    + Facebook
+    + Google
 + Express
 + React
 + Sass
 + Sequelize
-+ Use socket.io for communication
++ Socket.IO
 + Winston logging + Papertrail viewer
 + Babel (ES6 + async/await ready)
 + Webpack
 
 # On the roadmap
++ Redux
++ Authorized socket.io
 + Change authentication to run without refresh
 + Passport authentication (JWT)
-    + Facebook
-    + Google
     + Local (bcrypt)
     + Twitter
     + Github

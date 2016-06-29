@@ -1,22 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import socket from '../socket';
 
-let Users = React.createClass({
-    getInitialState: function() {
-        socket.emit('users.load');
-        return { users: [] };
-    },
+export default class Users extends Component {
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            users: []
+        };
+    }
     
     componentDidMount() {
-        socket.on('users.load.result', this._loadUsers);
-    },
-
-    _loadUsers: function(users) {
-        console.log('<<< users.load');
-        this.setState({ users: users });
-    },
+        socket.emit('users.load');
+        socket.on('users.load.result', (users) => {
+            this.setState({ users: users });
+        });
+    }
     
+    componentWillUnmount() {
+        socket.removeAllListeners('users.load.result');
+    }
+
     render() {
         return(
             <div>
@@ -37,6 +42,4 @@ let Users = React.createClass({
             </div>
         );
     }
-});
-
-export default Users;
+}

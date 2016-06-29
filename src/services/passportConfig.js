@@ -1,7 +1,7 @@
 import { Strategy as FacebookStrategy } from 'passport-facebook';
 import { OAuth2Strategy as GoogleStrategy } from 'passport-google-oauth';
 import { Strategy as LocalStrategy } from 'passport-local';
-import fbgraph from 'fbgraph';
+//import fbgraph from 'fbgraph';
 import config from '../config';
 import log from '../services/log';
 
@@ -11,16 +11,15 @@ if(process.env.MODE == 'dev_c9') {
 }
 
 export default function(passport) {
-	var User = require('../models/user');
+	var User = require('../models/user').default;
 	
 	passport.serializeUser(function(user, done) {
-		log.d('passport.serializeUser >> user.id', user.id);
 		done(null, user.id);
 	});
 
 	passport.deserializeUser(async function(userId, done) {
-		log.d('passport.deserializeUser >> id', userId);
 		let user = await User.findById(userId);
+		user = (user ? user.get () : user);
 		done(null, user);
 	});
 	
@@ -67,7 +66,8 @@ export default function(passport) {
 	passport.use(new GoogleStrategy({
 		clientID: config.passport.google.clientID,
 		clientSecret: config.passport.google.clientSecret,
-		callbackURL: host + config.passport.google.callbackURL
+		callbackURL: host + config.passport.google.callbackURL,
+		enableProof: true
 	},
 	async function(accessToken, refreshToken, profile, done) {
 		var dados = profile._json;
@@ -114,7 +114,8 @@ export default function(passport) {
 	passport.use(new FacebookStrategy({
 		clientID: config.passport.facebook.clientID,
 		clientSecret: config.passport.facebook.clientSecret,
-		callbackURL: host + config.passport.facebook.callbackURL
+		callbackURL: host + config.passport.facebook.callbackURL,
+		enableProof: true
 	}, async function(accessToken, refreshToken, profile, done) {
 		var dados = profile._json;
 		log.d('profile json', dados);
@@ -146,15 +147,22 @@ export default function(passport) {
 		};
 		
 		log.d('whereClause', whereClause);
+		let user = null;
 		
-		let user = await User.findOne(whereClause);
+		try {
+			user = await User.findOne(whereClause);
+			log.d('User.findOne', { user: (user ? user.get() : null) });
+		} catch(e) {
+			log.e('error', e);
+		}
+		
 		try {
 			if(user) {
 				user.facebookId = dados.id;
-	  			log.d('user data values', user.get());
-	  			
-	  			await user.save();
-	  			return done(null, user.get());
+				log.d('user data values', user.get());
+				
+				await user.save();
+				return done(null, user.get());
 			} else {
 				user = User.build({
 					name: dados.name,
@@ -162,10 +170,10 @@ export default function(passport) {
 					facebookId: dados.id
 				});
 				
-				await user.save();
+				let saved = await user.save();
 				
-				log.d('User.findOne >> save', user);
-				return done(null, user);
+				log.d('User.findOne >> save', saved);
+				return done(null, saved);
 			}
 		} catch(err) {
 			log.e('user.findOne:', whereClause, err);

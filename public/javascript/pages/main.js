@@ -1,10 +1,38 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router';
-import config from '../../../app/config';
 
 import './main.menu.scss';
+import config from '../../../app/config';
+import socket from '../socket';
 
-let Main = React.createClass({
+export default class Main extends Component {
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            user: null
+        };
+    }
+    
+    componentDidMount() {
+        socket.emit('me.load');
+        socket.on('me.load.result', (user) => {
+            this.setState({ user: user });
+        });
+    }
+    
+    onLogout() {
+        socket.emit('me.load', { logout: true });
+    }
+    
+    loginLogoutLink() {
+        if(this.state.user) {
+            return <Link className="navbar-link" to="/" onClick={this.onLogout}>Logout</Link>;
+        } else {
+            return <Link className="navbar-link" to="/login">Login</Link>;
+        }
+    }
+    
     render() {
         return(
             <div>
@@ -27,7 +55,7 @@ let Main = React.createClass({
                                         <Link className="navbar-link" to="/users">Users</Link>
                                     </li>
                                     <li className="navbar-item">
-                                        <Link className="navbar-link" to="/login">Login</Link>
+                                        {this.loginLogoutLink()}
                                     </li>
                                 </ul>
                             </nav>
@@ -40,6 +68,4 @@ let Main = React.createClass({
             </div>
         );
     }
-});
-
-export default Main;
+}

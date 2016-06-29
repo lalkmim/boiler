@@ -2,11 +2,11 @@ import passport from 'passport';
 import log from '../services/log';
 
 export function controller(router) {
-    /*
     router.get('/error', function(req, res, next) {
         res.render('error');
     });
     
+    /*
     router.get('/login', async function(req, res, next) {
         let menuItems = await MenuItem.findAll();
         var params = { title: config.site.name, menuItems: menuItems };
@@ -24,7 +24,7 @@ export function controller(router) {
     router.get('/auth/facebook/callback',
         passport.authenticate('facebook', { failureRedirect : '/error' }),
         function(req, res) {
-            log.d('res.redirect');
+            log.d('res.redirect', { user: req.user });
             res.redirect('/');
         });
         
@@ -33,8 +33,12 @@ export function controller(router) {
     router.get('/auth/google/callback',
         passport.authenticate('google', { failureRedirect : '/error' }),
         function(req, res) {
-            log.d('res.redirect');
-            res.redirect('/');
+            log.d('res.redirect', { user: req.user });
+            try {
+                res.redirect('/');
+            } catch(err) {
+                log.e(err);
+            }
         });
     
     router.get('*', function(req, res, next) {

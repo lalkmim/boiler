@@ -17,6 +17,9 @@ const app = express();
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'jade');
 
+// session definition
+app.set('expressSession', expressSession({ secret: config.express.session.secret, resave: true, saveUninitialized: true }));
+
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, '..', 'public', 'images', 'favicon.ico')));
 app.use(logger('dev'));
@@ -30,7 +33,7 @@ app.use(nodeSassMiddleware({
   outputStyle: 'compressed'
 }));
 app.use(express.static(path.join(__dirname, '../public')));
-app.use(expressSession({ secret: config.express.session.secret, resave: true, saveUninitialized: true }));
+app.use(app.get('expressSession'));
 app.use(passport.initialize());
 app.use(passport.session());
 

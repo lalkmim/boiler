@@ -1,8 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React, { Component } from 'react';
 import './login.scss';
 
-let Login = React.createClass({
+export default class Login extends Component {
+    constructor(props) {
+        super(props);
+    }
+    
     render() {
         return (
             <section id="loginForm">
@@ -42,6 +45,4 @@ let Login = React.createClass({
             </section>
         );
     }
-});
-
-export default Login;
+}
