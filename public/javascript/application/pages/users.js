@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import socket from '../socket';
+import socket from '../utils/socket';
+import store from '../utils/store';
 
 class Users extends Component {
     constructor(props) {
         super(props);
-        
-        this.state = {
-            users: []
-        };
     }
     
     componentDidMount() {
         socket.emit('users.load');
         socket.on('users.load.result', (users) => {
-            this.setState({ users: users });
+            //this.setState({ users: users });
+            store.dispatch({
+                type: 'USERS_LOAD_SUCCESS',
+                users: users
+            });
         });
     }
     
@@ -25,7 +27,7 @@ class Users extends Component {
     render() {
         return(
             <div>
-                {this.state.users.map(function(item) {
+                {this.props.users.map(function(item) {
                     return(
                         <div key={item.id} className="row">
                             <div className="two columns">
@@ -44,4 +46,10 @@ class Users extends Component {
     }
 }
 
-export default Users;
+const mapStateToProps = function(store) {
+    return {
+        users: store.usersState.users
+    };
+};
+
+export default connect(mapStateToProps)(Users);

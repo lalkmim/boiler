@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
-import ModalView, { INFO, WARNING, ERROR } from './modal.view';
+import { connect } from 'react-redux';
+
 import $ from 'jquery';
+
+import ModalView, { INFO, WARNING, ERROR } from './modal.view';
+
+import store from '../utils/store';
 
 class ModalContainer extends Component {
     constructor(props) {
         super(props);
         
         this.closeModal = this.closeModal.bind(this);
+        //this.onClose = this.onClose.bind(this);
     }
     
     openModal() {
@@ -23,8 +29,15 @@ class ModalContainer extends Component {
         var target = event.target;
         
         if (target == modal[0] || target == close[0]) {
-            this.props.onClose();
+            this.onClose();
         }
+    }
+    
+    onClose() {
+        store.dispatch({
+            type: 'MODAL_CLOSE',
+            messages: []
+        });
     }
     
     render() {
@@ -32,4 +45,10 @@ class ModalContainer extends Component {
     }
 }
 
-export default ModalContainer;
+const mapStateToProps = function(store) {
+    return {
+        messages: store.messagesState.messages
+    };
+};
+
+export default connect(mapStateToProps)(ModalContainer);

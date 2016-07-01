@@ -1,1 +1,1 @@
-import App from './public/javascript/webapp.js';
+import App from './public/javascript/application/webapp.js';

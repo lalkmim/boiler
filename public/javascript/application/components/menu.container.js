@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-
-import socket from '../socket';
+import { connect } from 'react-redux';
 
 import MenuView from './menu.view';
+
+import socket from '../utils/socket';
 
 class MenuContainer extends Component {
     constructor(props) {
@@ -18,4 +19,10 @@ class MenuContainer extends Component {
     }
 }
 
-export default MenuContainer;
+const mapStateToProps = function(store) {
+    return {
+        user: store.userState.user
+    };
+};
+
+export default connect(mapStateToProps)(MenuContainer);
