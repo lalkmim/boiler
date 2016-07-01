@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import ModalContainer, { INFO } from '../components/modal.container';
+import MenuContainer from '../components/menu.container';
 
-import './main.menu.scss';
-import config from '../../../app/config';
 import socket from '../socket';
 
 export default class Main extends Component {
@@ -10,57 +9,48 @@ export default class Main extends Component {
         super(props);
         
         this.state = {
-            user: null
+            user: null,
+            messages: []
         };
+        
+        this.onClose = this.onClose.bind(this);
     }
     
     componentDidMount() {
         socket.emit('me.load');
         socket.on('me.load.result', (user) => {
+            if(this.state.user && !user) {
+                this.setState({
+                    messages: this.state.messages.concat([{
+                        type: INFO,
+                        text: 'User logged out successfully.'
+                    }])
+                });
+            } else if(!this.state.user && user) {
+                this.setState({
+                    messages: this.state.messages.concat([{
+                        type: INFO,
+                        text: 'User logged in successfully.'
+                    }])
+                });
+            }
+            
             this.setState({ user: user });
         });
     }
     
-    onLogout() {
-        socket.emit('me.load', { logout: true });
-    }
-    
-    loginLogoutLink() {
-        if(this.state.user) {
-            return <Link className="navbar-link" to="/" onClick={this.onLogout}>Logout</Link>;
-        } else {
-            return <Link className="navbar-link" to="/login">Login</Link>;
-        }
+    onClose() {
+        this.setState({
+            messages: []
+        });
     }
     
     render() {
         return(
             <div>
+                <ModalContainer messages={this.state.messages} onClose={this.onClose} />
                 <section id="header">
-                    <div className="row">
-                        <div className="five columns">
-                            <h1 className="title">{config.site.name}</h1>
-                        </div>
-                        <div className="seven columns">
-                            <div className="navbar-spacer" />
-                            <div className="navbar-item navbar-menu">
-                                <a className="navbar-link" href="#">&#9776;</a>
-                            </div>
-                            <nav className="navbar">
-                                <ul className="navbar-list">
-                                    <li className="navbar-item">
-                                        <Link className="navbar-link" to="/">Home</Link>
-                                    </li>
-                                    <li className="navbar-item">
-                                        <Link className="navbar-link" to="/users">Users</Link>
-                                    </li>
-                                    <li className="navbar-item">
-                                        {this.loginLogoutLink()}
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
+                    <MenuContainer user={this.state.user} />
                 </section>
                 <section id="main">
                     {this.props.children}

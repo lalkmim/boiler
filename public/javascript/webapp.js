@@ -9,7 +9,7 @@ import Login from './pages/login.js';
 import Users from './pages/users.js';
 
 $(document).ready(function() {
-    ReactDOM.render((
+    ReactDOM.render(
         <Router history={browserHistory}>
             <Route path="/" component={Main}>
                 <IndexRoute component={Home} />
@@ -17,6 +17,6 @@ $(document).ready(function() {
                 <Route path="/users" component={Users} />
                 <Route path="/login" component={Login} />
             </Route>
-        </Router>
-    ), document.getElementById('app'));
+        </Router>, 
+        document.getElementById('app'));
 });

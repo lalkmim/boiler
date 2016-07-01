@@ -14,11 +14,13 @@ Working features and libraries:
 + Sequelize
 + Socket.IO
 + Winston logging + Papertrail viewer
-+ Babel (ES6 + async/await ready)
++ Babel (ES6 + async/await)
 + Webpack
++ Flash messages
 
-# On the roadmap
+# Roadmap
 + Redux
++ Config Webpack for smaller bundles
 + Authorized socket.io
 + Change authentication to run without refresh
 + Passport authentication (JWT)

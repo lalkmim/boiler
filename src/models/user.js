@@ -23,6 +23,11 @@ var User = db.define('User', {
     googleId: {
         type: Sequelize.STRING,
         field: 'google_id'
+    },
+    isAdmin: {
+        type: Sequelize.BOOLEAN,
+        field: 'is_admin',
+        defaultValue: false
     }
 }, {
     tableName: 'user'
