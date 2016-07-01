@@ -11,8 +11,7 @@ class ModalContainer extends Component {
     constructor(props) {
         super(props);
         
-        this.closeModal = this.closeModal.bind(this);
-        //this.onClose = this.onClose.bind(this);
+        this.handleCloseModal = this.handleCloseModal.bind(this);
     }
     
     openModal() {
@@ -23,25 +22,21 @@ class ModalContainer extends Component {
         return (this.props.messages.length > 0);
     }
     
-    closeModal(event) {
+    handleCloseModal(event) {
         var modal = $('#messagesModal');
         var close = $('#messagesModal .close');
         var target = event.target;
         
         if (target == modal[0] || target == close[0]) {
-            this.onClose();
+            store.dispatch({
+                type: 'MODAL_CLOSE',
+                messages: []
+            });
         }
     }
     
-    onClose() {
-        store.dispatch({
-            type: 'MODAL_CLOSE',
-            messages: []
-        });
-    }
-    
     render() {
-        return (<ModalView show={this.shouldShow()} messages={this.props.messages} onClick={this.closeModal} />);
+        return (<ModalView show={this.shouldShow()} messages={this.props.messages} onClick={this.handleCloseModal} />);
     }
 }
 

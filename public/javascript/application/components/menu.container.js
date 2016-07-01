@@ -10,12 +10,12 @@ class MenuContainer extends Component {
         super(props);
     }
     
-    onLogout() {
+    handleLogout() {
         socket.emit('me.load', { logout: true });
     }
     
     render() {
-        return (<MenuView siteName="boiler-pes3" user={this.props.user} onLogout={this.onLogout} />);
+        return (<MenuView siteName="boiler-pes3" user={this.props.user} handleLogout={this.handleLogout} />);
     }
 }
 

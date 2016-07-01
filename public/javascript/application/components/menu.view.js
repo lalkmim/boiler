@@ -12,7 +12,7 @@ class MenuView extends Component {
     
     loginLogoutLink() {
         if(this.props.user) {
-            return <Link className="navbar-link" to="/" onClick={this.props.onLogout}>Logout</Link>;
+            return <Link className="navbar-link" to="/" onClick={this.props.handleLogout}>Logout</Link>;
         } else {
             return <Link className="navbar-link" to="/login">Login</Link>;
         }

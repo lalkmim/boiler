@@ -9,17 +9,17 @@ Working features and libraries:
     + Facebook
     + Google
 + Express
-+ React
 + Sass
 + Sequelize
 + Socket.IO
-+ Winston logging + Papertrail viewer
++ React + Redux
 + Babel (ES6 + async/await)
 + Webpack
-+ Flash messages
++ Winston logging + Papertrail viewer
++ Components
+    + Modal for flash messages
 
 # Roadmap
-+ Redux
 + Config Webpack for smaller bundles
 + Authorized socket.io
 + Change authentication to run without refresh
