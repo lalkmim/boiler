@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 import './menu.view.scss';
 
-export default class MenuView extends Component {
+class MenuView extends Component {
     constructor(props) {
         super(props);
         
@@ -46,3 +46,5 @@ export default class MenuView extends Component {
             </div>);
     }
 }
+
+export default MenuView;

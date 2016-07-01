@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ModalView, { INFO, WARNING, ERROR } from './modal.view';
 import $ from 'jquery';
 
-export default class ModalContainer extends Component {
+class ModalContainer extends Component {
     constructor(props) {
         super(props);
         
@@ -31,3 +31,5 @@ export default class ModalContainer extends Component {
         return (<ModalView show={this.shouldShow()} messages={this.props.messages} onClick={this.closeModal} />);
     }
 }
+
+export default ModalContainer;

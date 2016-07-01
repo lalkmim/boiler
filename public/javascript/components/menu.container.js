@@ -4,7 +4,7 @@ import socket from '../socket';
 
 import MenuView from './menu.view';
 
-export default class MenuContainer extends Component {
+class MenuContainer extends Component {
     constructor(props) {
         super(props);
     }
@@ -17,3 +17,5 @@ export default class MenuContainer extends Component {
         return (<MenuView siteName="boiler-pes3" user={this.props.user} onLogout={this.onLogout} />);
     }
 }
+
+export default MenuContainer;

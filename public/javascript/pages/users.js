@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import socket from '../socket';
 
-export default class Users extends Component {
+class Users extends Component {
     constructor(props) {
         super(props);
         
@@ -43,3 +43,5 @@ export default class Users extends Component {
         );
     }
 }
+
+export default Users;

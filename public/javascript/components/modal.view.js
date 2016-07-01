@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './modal.view.scss';
 
-export default class ModalView extends Component {
+class ModalView extends Component {
     constructor(props) {
         super(props);
         
@@ -35,6 +35,7 @@ export default class ModalView extends Component {
     }
 }
 
+export default ModalView;
 export const INFO = 'i';
 export const WARNING = 'w';
 export const ERROR = 'e';

@@ -4,7 +4,7 @@ import MenuContainer from '../components/menu.container';
 
 import socket from '../socket';
 
-export default class Main extends Component {
+class Main extends Component {
     constructor(props) {
         super(props);
         
@@ -59,3 +59,5 @@ export default class Main extends Component {
         );
     }
 }
+
+export default Main;
