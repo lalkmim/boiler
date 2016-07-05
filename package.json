@@ -14,11 +14,38 @@
       "transform-async-to-generator"
     ]
   },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "rules": {
+      "strict": 0,
+      "semi": [
+        "error",
+        "always"
+      ],
+      "quotes": [
+        "error",
+        "single"
+      ]
+    },
+    "env": {
+      "node": true,
+      "es6": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 7,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true,
+        "modules": true
+      }
+    }
+  },
   "scripts": {
     "start": "npm run build && node ./app/bin/www.js",
     "build": "rm -rf app/*; babel src -d app",
     "webpack:dev": "webpack --watch --display-modules",
-    "webpack:prod": "webpack -p -d"
+    "webpack:prod": "webpack -p -d",
+    "eslint": "./node_modules/.bin/eslint *"
   },
   "dependencies": {
     "babel-polyfill": "^6.9.1",
@@ -54,6 +81,7 @@
   "devDependencies": {
     "babel-cli": "^6.9.0",
     "babel-core": "^6.10.4",
+    "babel-eslint": "^6.1.0",
     "babel-loader": "^6.2.4",
     "babel-plugin-syntax-async-functions": "^6.8.0",
     "babel-plugin-transform-async-to-generator": "^6.8.0",
@@ -63,6 +91,7 @@
     "babel-preset-stage-2": "^6.11.0",
     "classnames": "^2.2.5",
     "css-loader": "^0.23.1",
+    "eslint": "^3.0.1",
     "jquery": "^3.0.0",
     "react-router": "^2.5.0",
     "redux-act": "^0.5.0",

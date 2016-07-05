@@ -20,7 +20,7 @@ Working features and libraries:
     + Modal for flash messages
 
 # Roadmap
-+ Lint
++ ESLint
 + Immutable
 + Config Webpack for smaller bundles
 + Authorized socket.io

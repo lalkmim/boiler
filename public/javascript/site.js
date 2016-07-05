@@ -10,12 +10,12 @@ $(document).ready(function() {
       navOffsetTop = ($nav.offset() ? $nav.offset().top : 0),
       $document = $(document),
       entityMap = {
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
         '"': '&quot;',
-        "'": '&#39;',
-        "/": '&#x2F;'
+        '\'': '&#39;',
+        '/': '&#x2F;'
       };
 
   function init() {
@@ -29,7 +29,7 @@ $(document).ready(function() {
 
   function smoothScroll(e) {
     e.preventDefault();
-    $(document).off("scroll");
+    $(document).off('scroll');
     var target = this.hash;
     //var menu = target;
     if(target) {
@@ -38,7 +38,7 @@ $(document).ready(function() {
           'scrollTop': $target.offset().top-40
       }, 0, 'swing', function () {
           window.location.hash = target;
-          $(document).on("scroll", onScroll);
+          $(document).on('scroll', onScroll);
       });
     }
   }
@@ -57,9 +57,9 @@ $(document).ready(function() {
     }
   }
 
-  $("#button").click(function() {
+  $('#button').click(function() {
     $('html, body').animate({
-        scrollTop: $("#elementtoScrollToID").offset().top
+        scrollTop: $('#elementtoScrollToID').offset().top
     }, 2000);
   });
 

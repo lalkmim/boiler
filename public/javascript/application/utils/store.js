@@ -6,8 +6,8 @@ import { INFO, WARNING, ERROR } from '../components/modal.view';
 import { loginSuccess, logoutSuccess, modalClose, usersLoadSuccess } from './actions';
 
 const userReducer = createReducer({
-    [loginSuccess]: (state, payload) => { return { ...state, user: payload.user } },
-    [logoutSuccess]: (state, payload) => { return { ...state, user: payload.user } }
+    [loginSuccess]: (state, payload) => { return { ...state, user: payload.user }; },
+    [logoutSuccess]: (state, payload) => { return { ...state, user: payload.user }; }
 }, {
     user: null
 });
@@ -15,19 +15,19 @@ const userReducer = createReducer({
 const messagesReducer = createReducer({
     [loginSuccess]: (state, payload) => { return { ...state, 
         messages: [ ...state.messages, payload.message ]
-    }},
+    }; },
     [logoutSuccess]: (state, payload) => { return { ...state, 
         messages: [ ...state.messages, payload.message ]
-    }},
+    }; },
     [modalClose]: (state) => { return { ...state,
         messages: []
-    }}
+    }; }
 }, {
     messages: []
 });
 
 const usersReducer = createReducer({
-    [usersLoadSuccess]: (state, payload) => { return { ...state, users: payload.users } }
+    [usersLoadSuccess]: (state, payload) => { return { ...state, users: payload.users }; }
 }, {
     users: []
 });
