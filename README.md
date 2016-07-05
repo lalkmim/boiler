@@ -16,11 +16,11 @@ Working features and libraries:
 + Babel (ES6 + async/await + spread)
 + Webpack
 + Winston logging + Papertrail viewer
++ ESLint
 + Components
     + Modal for flash messages
 
 # Roadmap
-+ ESLint
 + Immutable
 + Config Webpack for smaller bundles
 + Authorized socket.io
