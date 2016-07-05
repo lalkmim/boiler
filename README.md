@@ -13,7 +13,7 @@ Working features and libraries:
 + Sequelize
 + Socket.IO
 + React + Redux + redux-act
-+ Babel (ES6 + async/await)
++ Babel (ES6 + async/await + spread)
 + Webpack
 + Winston logging + Papertrail viewer
 + Components
