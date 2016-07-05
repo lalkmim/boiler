@@ -1,7 +1,8 @@
 import { createStore, combineReducers } from 'redux';
 import { createReducer } from 'redux-act';
 
-import { INFO, WARNING, ERROR } from '../components/modal.container';
+import { INFO, WARNING, ERROR } from '../components/modal.view';
+
 import { loginSuccess, logoutSuccess, modalClose, usersLoadSuccess } from './actions';
 
 const userReducer = createReducer({

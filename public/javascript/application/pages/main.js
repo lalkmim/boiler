@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ModalContainer, { INFO } from '../components/modal.container';
+import ModalContainer from '../components/modal.container';
+import { INFO } from '../components/modal.view';
 import MenuContainer from '../components/menu.container';
 
 import store from '../utils/store';
