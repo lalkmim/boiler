@@ -2,11 +2,7 @@ import Sequelize from 'sequelize';
 import fs from 'fs';
 import path from 'path';
 import config from '../config';
-import log from '../services/log';
-/*
-import MenuItem from '../models/menu_item';
-import User from '../models/user';
-*/
+
 if (!fs.existsSync(config.database.folder)){
     fs.mkdirSync(config.database.folder);
 }

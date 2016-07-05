@@ -6,19 +6,6 @@ export function controller(router) {
         res.render('error');
     });
     
-    /*
-    router.get('/login', async function(req, res, next) {
-        let menuItems = await MenuItem.findAll();
-        var params = { title: config.site.name, menuItems: menuItems };
-        res.render('login', params);
-    });
-    
-    router.get('/logout', function(req, res) {
-        req.logout();
-        res.redirect('/');
-    });
-    */
-    
     router.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
 
     router.get('/auth/facebook/callback',

@@ -6,6 +6,7 @@ import $ from 'jquery';
 import ModalView, { INFO, WARNING, ERROR } from './modal.view';
 
 import store from '../utils/store';
+import { modalClose } from '../utils/actions';
 
 class ModalContainer extends Component {
     constructor(props) {
@@ -28,10 +29,7 @@ class ModalContainer extends Component {
         var target = event.target;
         
         if (target == modal[0] || target == close[0]) {
-            store.dispatch({
-                type: 'MODAL_CLOSE',
-                messages: []
-            });
+            store.dispatch(modalClose());
         }
     }
     

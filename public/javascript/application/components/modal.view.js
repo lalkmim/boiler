@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
+
 import './modal.view.scss';
 
 class ModalView extends Component {
@@ -25,8 +27,14 @@ class ModalView extends Component {
     }
     
     render() {
+        let classes = classNames({
+            'modal': true,
+            'show': this.props.show,
+            'hide': !this.props.show
+        });
+        
         return (
-            <div id="messagesModal" className={'modal ' + (this.props.show ? 'show' : 'hide' )} onClick={this.props.onClick}>
+            <div id="messagesModal" className={classes} onClick={this.props.onClick}>
                 <div className="modal-content">
                     <span className="close" onClick={this.props.onClick}>×</span>
                     {this.renderMessages()}

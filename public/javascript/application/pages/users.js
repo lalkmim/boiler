@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import socket from '../utils/socket';
 import store from '../utils/store';
+import { usersLoadSuccess } from '../utils/actions';
 
 class Users extends Component {
     constructor(props) {
@@ -12,11 +13,7 @@ class Users extends Component {
     componentDidMount() {
         socket.emit('users.load');
         socket.on('users.load.result', (users) => {
-            //this.setState({ users: users });
-            store.dispatch({
-                type: 'USERS_LOAD_SUCCESS',
-                users: users
-            });
+            store.dispatch(usersLoadSuccess({ users: users }));
         });
     }
     

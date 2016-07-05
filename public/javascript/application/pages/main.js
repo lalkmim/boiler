@@ -6,6 +6,7 @@ import MenuContainer from '../components/menu.container';
 
 import store from '../utils/store';
 import socket from '../utils/socket';
+import { loginSuccess, logoutSuccess } from '../utils/actions';
 
 class Main extends Component {
     constructor(props) {
@@ -15,19 +16,26 @@ class Main extends Component {
     componentDidMount() {
         socket.emit('me.load');
         socket.on('me.load.result', (user) => {
-            let type = null;
+            let text = '';
             
             if(this.props.user && !user) {
-                type = 'LOGOUT_SUCCESS';
+                text = 'User signed out successfully.';
+                store.dispatch(logoutSuccess({ 
+                    user: user, 
+                    message: {
+                        type: INFO,
+                        text: text 
+                    }
+                }));
             } else if(!this.props.user && user) {
-                type = 'LOGIN_SUCCESS';
-            }
-            
-            if(type) {
-                store.dispatch({
-                    type: type,
-                    user: user
-                });
+                text = 'User signed in successfully.';
+                store.dispatch(loginSuccess({ 
+                    user: user, 
+                    message: {
+                        type: INFO,
+                        text: text
+                    }
+                }));
             }
         });
     }

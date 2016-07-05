@@ -12,7 +12,7 @@ Working features and libraries:
 + Sass
 + Sequelize
 + Socket.IO
-+ React + Redux
++ React + Redux + redux-act
 + Babel (ES6 + async/await)
 + Webpack
 + Winston logging + Papertrail viewer
@@ -20,6 +20,10 @@ Working features and libraries:
     + Modal for flash messages
 
 # Roadmap
++ PropTypes
++ defaultProps
++ Immutable
++ Lint
 + Config Webpack for smaller bundles
 + Authorized socket.io
 + Change authentication to run without refresh
