@@ -19,6 +19,10 @@ class MenuContainer extends Component {
     }
 }
 
+MenuContainer.propTypes = {
+    user: React.PropTypes.object
+};
+
 const mapStateToProps = function(store) {
     return {
         user: store.userState.user

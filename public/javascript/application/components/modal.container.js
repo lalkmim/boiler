@@ -38,6 +38,13 @@ class ModalContainer extends Component {
     }
 }
 
+ModalContainer.propTypes = {
+    messages: React.PropTypes.arrayOf(React.PropTypes.shape({
+        type: React.PropTypes.string,
+        text: React.PropTypes.string
+    }))
+};
+
 const mapStateToProps = function(store) {
     return {
         messages: store.messagesState.messages

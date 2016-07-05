@@ -56,6 +56,14 @@ class Main extends Component {
     }
 }
 
+Main.propTypes = {
+    user: React.PropTypes.shape({
+        id: React.PropTypes.number,
+        name: React.PropTypes.string,
+        email: React.PropTypes.string
+    })
+};
+
 const mapStateToProps = function(store) {
     return {
         user: store.userState.user

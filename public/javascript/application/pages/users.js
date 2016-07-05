@@ -43,6 +43,14 @@ class Users extends Component {
     }
 }
 
+Users.propTypes = {
+    users: React.PropTypes.arrayOf(React.PropTypes.shape({
+        id: React.PropTypes.number,
+        name: React.PropTypes.string,
+        email: React.PropTypes.string
+    }))
+};
+
 const mapStateToProps = function(store) {
     return {
         users: store.usersState.users
